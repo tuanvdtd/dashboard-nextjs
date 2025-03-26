@@ -19,7 +19,7 @@ export default function TopNav() {
                         </Link>
                     </div>
                     {/* Phần Search */}
-                    <div className="flex col-span-3 items-center border-1 border-gray-300 gap-2  px-3 py-2  shadow-md rounded-full w-2/5 ">
+                    <div className="flex col-span-3 items-center border-1 border-gray-300 gap-2 px-3 py-2  shadow-md rounded-full w-2/5 ">
                         <Search />
                         <input type="text" placeholder="Search for a course" className="w-full outline-none hidden sm:block " />
                     </div>

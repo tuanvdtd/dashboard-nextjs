@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 
 const links = [
     { name: 'Dashboard', href: '/dashboard', icon: LayoutGrid },
-    { name: 'Browse', href: '/dashboard/customers', icon: Globe },
+    { name: 'Browse', href: '/dashboard/browse', icon: Globe },
 ];
 
 export default function NavLinks() {

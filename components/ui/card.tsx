@@ -16,10 +16,15 @@ interface MyCardProps {
     course: Course;
 }
 const conicColors: ProgressProps['strokeColor'] = {
-    '0%': '#87d068',
-    '50%': '#ffe58f',
-    '100%': '#ffccc7',
+    '0%': 'oklch(0.586 0.253 17.585)',
+    '50%': 'oklch(0.546 0.245 262.881)',
+    '100%': 'oklch(0.723 0.219 149.579)',
 };
+
+// const twoColors: ProgressProps['strokeColor'] = {
+//     '0%': '#108ee9',
+//     '100%': '#87d068',
+// };
 
 const MyCard: React.FC<MyCardProps> = ({ course }) => {
     return (

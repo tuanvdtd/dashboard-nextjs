@@ -6,8 +6,8 @@ export default function HustLogo() {
         <div
             className=" flex flex-row items-center leading-none gap-3"
         >
-            <Image src="/hustlogo.png" alt="logo" width={32} height={32} />
-            <p className="text-2xl lg:text-3xl text-red-700 font-semibold hidden lg:block"  >HustLMS</p>
+            <Image src="/hustlogo.png" alt="logo" width={25} height={25} />
+            <p className="text-3xl text-red-700 font-semibold hidden sm:block"  >HustLMS</p>
         </div>
     );
 }

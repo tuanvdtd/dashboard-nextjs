@@ -1,9 +1,4 @@
-'use client';
-import MyCard from "@/components/ui/card";
-import Tag from "@/components/ui/tag";
-import { Course } from "@/components/ui/card";
-
-const courses: Course[] = [
+const dataUser = [
     {
         title: "React for Beginners",
         url: "https://th.bing.com/th/id/OIP.M8xAkuJb9TscK44TIJ_aXgHaEK?rs=1&pid=ImgDetMain",
@@ -42,15 +37,4 @@ const courses: Course[] = [
     }
 ];
 
-export default function Page() {
-    return (
-        <>
-            <Tag />
-            <div className="text-4xl flex flex-row gap-x-5 gap-y-4 pt-10 pl-20 flex-wrap ">
-                {courses.map((course, index) => (
-                    <MyCard key={index} course={course} />
-                ))}
-            </div>
-        </>
-    );
-}
+export default dataUser;

@@ -130,3 +130,7 @@
 .scrollbar-none::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Edge */
 }
+.intro {
+  @apply h-full text-white flex rounded-2xl;
+}
+

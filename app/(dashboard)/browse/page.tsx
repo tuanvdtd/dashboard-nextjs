@@ -13,7 +13,7 @@ export default function Page() {
                 {dataUser.map((course, index) => (
                     <Link
                         key={index}
-                        href={'/dashboard/browse/course'}>
+                        href={'/browse/course'}>
                         <MyCard key={index} title={course.title}
                             url={course.url}
                             progress={course.progress}

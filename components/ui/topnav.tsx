@@ -1,9 +1,10 @@
 // Code: TopNav component
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import ModeToggle from "./toggle-theme";
-import { Search } from "lucide-react";
+
 import HustLogo from "./hust-logo";
 import Link from "next/link";
+import MySearch from "./search";
 
 export default function TopNav() {
     return (
@@ -17,14 +18,7 @@ export default function TopNav() {
                     </div>
 
                     {/* Phần Search */}
-                    <div className="group flex-grow flex items-center border-2 border-gray-300 gap-2 px-3 py-2 shadow-md rounded-full ml-10 max-w-[28%] transition-all duration-200 focus-within:border-blue-500">
-                        <Search className="text-gray-500" />
-                        <input
-                            type="text"
-                            placeholder="Search for a course"
-                            className="w-full outline-none hidden sm:block focus:outline-none"
-                        />
-                    </div>
+                    <MySearch />
 
                     {/* Phần avatar */}
                     <div className="flex items-center gap-5 pr-10">

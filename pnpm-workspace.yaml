@@ -1,0 +1,7 @@
+onlyBuiltDependencies:
+  - '@clerk/shared'
+  - '@prisma/engines'
+  - bcrypt
+  - esbuild
+  - prisma
+  - sharp

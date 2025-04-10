@@ -5,6 +5,8 @@ import ModeToggle from "./toggle-theme";
 import HustLogo from "./hust-logo";
 import Link from "next/link";
 import MySearch from "./search";
+import { Suspense } from "react";
+
 
 export default function TopNav() {
     return (
@@ -18,7 +20,9 @@ export default function TopNav() {
                     </div>
 
                     {/* Phần Search */}
-                    <MySearch />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <MySearch />
+                    </Suspense>
 
                     {/* Phần avatar */}
                     <div className="flex items-center gap-5 pr-10">

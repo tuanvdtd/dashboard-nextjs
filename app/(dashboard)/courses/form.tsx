@@ -37,38 +37,40 @@
 //     SelectTrigger,
 //     SelectValue
 // } from "@/components/ui/select"
+// import { Course } from "./types/table";
 
 // const formSchema = z.object({
-//     name_4603829743: z.string(),
-//     name_0878515932: z.number(),
-//     name_0706064476: z.string().optional(),
-//     name_6646786819: z.string()
+//     title: z.string(),
+//     price: z.number(),
+//     status: z.string().optional(),
+//     id: z.string()
 // });
 
-// export default function MyForm() {
+// interface MyFormProps {
+//     onSubmit: (data: Course) => void;
+//     initialData?: Course | null;
+// }
+
+// export default function MyForm({ onSubmit, initialData }: MyFormProps) {
 
 //     const form = useForm<z.infer<typeof formSchema>>({
 //         resolver: zodResolver(formSchema),
 
 //     })
-
-//     function onSubmit(values: z.infer<typeof formSchema>) {
+//     function handleSubmit(values: z.infer<typeof formSchema>) {
 //         try {
-//             console.log(values);
-//             toast(
-//                 <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-//                     <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-//                 </pre>
-//             );
+//             onSubmit(values as Course)
+//             form.reset()
+//             toast.success("User data submitted successfully!")
 //         } catch (error) {
-//             console.error("Form submission error", error);
-//             toast.error("Failed to submit the form. Please try again.");
+//             console.error("Form submission error", error)
+//             toast.error("Failed to submit the form. Please try again.")
 //         }
 //     }
 
 //     return (
 //         <Form {...form}>
-//             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-3xl mx-auto py-10">
+//             <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8 max-w-3xl mx-auto py-10">
 
 //                 <div className="grid grid-cols-12 gap-4">
 
@@ -76,7 +78,7 @@
 
 //                         <FormField
 //                             control={form.control}
-//                             name="name_4603829743"
+//                             name="title"
 //                             render={({ field }) => (
 //                                 <FormItem>
 //                                     <FormLabel>Title</FormLabel>
@@ -98,10 +100,10 @@
 
 //                         <FormField
 //                             control={form.control}
-//                             name="name_0878515932"
+//                             name="price"
 //                             render={({ field }) => (
 //                                 <FormItem>
-//                                     <FormLabel>ID</FormLabel>
+//                                     <FormLabel>Price</FormLabel>
 //                                     <FormControl>
 //                                         <Input
 //                                             placeholder="shadcn"
@@ -124,10 +126,10 @@
 
 //                         <FormField
 //                             control={form.control}
-//                             name="name_0706064476"
+//                             name="status"
 //                             render={({ field }) => (
 //                                 <FormItem>
-//                                     <FormLabel>Gender</FormLabel>
+//                                     <FormLabel>Status</FormLabel>
 //                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
 //                                         <FormControl>
 //                                             <SelectTrigger>
@@ -151,15 +153,15 @@
 
 //                         <FormField
 //                             control={form.control}
-//                             name="name_6646786819"
+//                             name="id"
 //                             render={({ field }) => (
 //                                 <FormItem>
-//                                     <FormLabel>Email</FormLabel>
+//                                     <FormLabel>ID</FormLabel>
 //                                     <FormControl>
 //                                         <Input
 //                                             placeholder="shadcn"
 
-//                                             type="email"
+//                                             type="string"
 //                                             {...field} />
 //                                     </FormControl>
 //                                     <FormDescription>This is your public display name.</FormDescription>
@@ -170,7 +172,7 @@
 //                     </div>
 
 //                 </div>
-//                 <Button type="submit">Submit</Button>
+//                 <Button type="submit">{initialData ? "Update" : "Create"}</Button>
 //             </form>
 //         </Form>
 //     )

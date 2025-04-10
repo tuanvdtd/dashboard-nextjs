@@ -1,6 +1,6 @@
 'use client';
 import * as React from "react"
-
+import { CirclePlus } from "lucide-react"
 import { DataTablePagination } from "./_components/Pagination";
 import {
     ColumnDef,
@@ -17,6 +17,8 @@ import {
 
 import { Input } from "@/components/ui/input"
 
+import { Button } from "@/components/ui/button"
+
 import { DataTableViewOptions } from "./_components/ViewOptions"
 
 import {
@@ -31,19 +33,19 @@ import {
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[],
     data: TData[],
-    // onAdd: () => void;
-    // onEdit: (data: TData) => void;
-    // onDelete: (id: string) => void;
-    // onmultiDelete: (data: TData[]) => void;
+    onAdd: () => void;
+    onEdit: (data: TData) => void;
+    onDelete: (id: string) => void;
+    onmultiDelete: (data: TData[]) => void;
 }
 
 export default function DataTable<TData, TValue>({
     columns,
     data,
-    // onAdd,
-    // onEdit,
-    // onDelete,
-    // onmultiDelete,
+    onAdd,
+    onEdit,
+    onDelete,
+    onmultiDelete,
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -67,21 +69,21 @@ export default function DataTable<TData, TValue>({
             columnVisibility,
             rowSelection,
         },
-        // meta: {
-        //     onEdit,
-        //     onDelete,
-        // },
+        meta: {
+            onEdit,
+            onDelete,
+        },
     })
-    // const handlemultiDelete = () => {
-    //     const selectedItems = table
-    //         .getFilteredSelectedRowModel()
-    //         .rows.map((row) => row.original as TData);
-    //     onmultiDelete(selectedItems);
-    // };
+    const handlemultiDelete = () => {
+        const selectedItems = table
+            .getFilteredSelectedRowModel()
+            .rows.map((row) => row.original as TData);
+        onmultiDelete(selectedItems);
+    };
 
     return (
         <div className="w-[95%] mx-auto">
-            <div className="flex items-center py-4">
+            <div className="flex justify-between items-center py-4">
                 <Input
                     placeholder="Filter course..."
                     value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -91,7 +93,20 @@ export default function DataTable<TData, TValue>({
                     className="max-w-sm"
                 />
 
-                <DataTableViewOptions table={table} />
+                <div className="flex items-center gap-4">
+
+                    {Object.keys(rowSelection).length > 0 && (
+                        <Button onClick={handlemultiDelete} variant="destructive">
+                            Delete Selected ({Object.keys(rowSelection).length})
+                        </Button>
+                    )}
+                    <Button onClick={onAdd} className="bg-blue-600 hover:bg-blue-700 text-white rounded-md shadow-md ">
+                        <CirclePlus />
+                        Create Course
+                    </Button>
+
+                    <DataTableViewOptions table={table} />
+                </div>
 
             </div>
             <div className="rounded-md border">

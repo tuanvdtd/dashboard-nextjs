@@ -1,6 +1,6 @@
-export type Course = {
-    id: string,
-    price: number,
-    status: "Published" | "Draft",
-    title: string,
+export interface MyFormData {
+    id: string;
+    title: string;
+    price: number;
+    status: string;
 }

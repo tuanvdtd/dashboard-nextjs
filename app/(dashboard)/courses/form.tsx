@@ -1,179 +1,152 @@
-// "use client"
-// import {
-//     useState
-// } from "react"
-// import {
-//     toast
-// } from "sonner"
-// import {
-//     useForm
-// } from "react-hook-form"
-// import {
-//     zodResolver
-// } from "@hookform/resolvers/zod"
-// import * as z from "zod"
-// import {
-//     cn
-// } from "@/lib/utils"
-// import {
-//     Button
-// } from "@/components/ui/button"
-// import {
-//     Form,
-//     FormControl,
-//     FormDescription,
-//     FormField,
-//     FormItem,
-//     FormLabel,
-//     FormMessage,
-// } from "@/components/ui/form"
-// import {
-//     Input
-// } from "@/components/ui/input"
-// import {
-//     Select,
-//     SelectContent,
-//     SelectItem,
-//     SelectTrigger,
-//     SelectValue
-// } from "@/components/ui/select"
-// import { Course } from "./types/table";
+"use client"
+import { toast } from "sonner"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
 
-// const formSchema = z.object({
-//     title: z.string(),
-//     price: z.number(),
-//     status: z.string().optional(),
-//     id: z.string()
-// });
+import { Button } from "@/components/ui/button"
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form"
 
-// interface MyFormProps {
-//     onSubmit: (data: Course) => void;
-//     initialData?: Course | null;
-// }
+import { Input } from "@/components/ui/input"
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue
+} from "@/components/ui/select"
 
-// export default function MyForm({ onSubmit, initialData }: MyFormProps) {
+import { MyFormData } from "./types/table";
 
-//     const form = useForm<z.infer<typeof formSchema>>({
-//         resolver: zodResolver(formSchema),
+const formSchema = z.object({
+    id: z.string().optional(),
+    title: z.string().min(2, { message: "Title must be at least 2 characters" }),
+    status: z.string().optional(),
+    price: z.coerce.number(),
+});
 
-//     })
-//     function handleSubmit(values: z.infer<typeof formSchema>) {
-//         try {
-//             onSubmit(values as Course)
-//             form.reset()
-//             toast.success("User data submitted successfully!")
-//         } catch (error) {
-//             console.error("Form submission error", error)
-//             toast.error("Failed to submit the form. Please try again.")
-//         }
-//     }
+interface MyFormProps {
+    onSubmit: (data: MyFormData) => void;
+    initialData?: MyFormData | null;
+}
 
-//     return (
-//         <Form {...form}>
-//             <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8 max-w-3xl mx-auto py-10">
+export default function MyForm({ onSubmit, initialData }: MyFormProps) {
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: initialData || {
+            title: "",
+            status: "",
+            price: 0,
+            id: "",
+        },
+    })
 
-//                 <div className="grid grid-cols-12 gap-4">
+    function handleSubmit(values: z.infer<typeof formSchema>) {
+        try {
+            onSubmit(values as MyFormData)
+            form.reset()
+            toast.success("User data submitted successfully!")
+        } catch (error) {
+            console.error("Form submission error", error)
+            toast.error("Failed to submit the form. Please try again.")
+        }
+    }
 
-//                     <div className="col-span-6">
+    return (
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8 max-w-3xl mx-auto py-10">
 
-//                         <FormField
-//                             control={form.control}
-//                             name="title"
-//                             render={({ field }) => (
-//                                 <FormItem>
-//                                     <FormLabel>Title</FormLabel>
-//                                     <FormControl>
-//                                         <Input
-//                                             placeholder="shadcn"
+                <div className="grid grid-cols-12 gap-4">
 
-//                                             type="text"
-//                                             {...field} />
-//                                     </FormControl>
-//                                     <FormDescription>This is your public display name.</FormDescription>
-//                                     <FormMessage />
-//                                 </FormItem>
-//                             )}
-//                         />
-//                     </div>
+                    <div className="col-span-6">
 
-//                     <div className="col-span-6">
+                        <FormField
+                            control={form.control}
+                            name="title"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Title</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="Name Course"
 
-//                         <FormField
-//                             control={form.control}
-//                             name="price"
-//                             render={({ field }) => (
-//                                 <FormItem>
-//                                     <FormLabel>Price</FormLabel>
-//                                     <FormControl>
-//                                         <Input
-//                                             placeholder="shadcn"
+                                            type="text"
+                                            {...field} />
+                                    </FormControl>
+                                    <FormDescription>This is your public  name course.</FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
 
-//                                             type="number"
-//                                             {...field} />
-//                                     </FormControl>
-//                                     <FormDescription>This is your public display name.</FormDescription>
-//                                     <FormMessage />
-//                                 </FormItem>
-//                             )}
-//                         />
-//                     </div>
+                    <div className="col-span-6">
 
-//                 </div>
+                        <FormField
+                            control={form.control}
+                            name="price"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Price</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="shadcn"
 
-//                 <div className="grid grid-cols-12 gap-4">
+                                            type="number"
+                                            {...field} />
+                                    </FormControl>
+                                    <FormDescription>This is your public display price.</FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
 
-//                     <div className="col-span-6">
+                </div>
 
-//                         <FormField
-//                             control={form.control}
-//                             name="status"
-//                             render={({ field }) => (
-//                                 <FormItem>
-//                                     <FormLabel>Status</FormLabel>
-//                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
-//                                         <FormControl>
-//                                             <SelectTrigger>
-//                                                 <SelectValue placeholder="Select a verified email to display" />
-//                                             </SelectTrigger>
-//                                         </FormControl>
-//                                         <SelectContent>
-//                                             <SelectItem value="m@example.com">m@example.com</SelectItem>
-//                                             <SelectItem value="m@google.com">m@google.com</SelectItem>
-//                                             <SelectItem value="m@support.com">m@support.com</SelectItem>
-//                                         </SelectContent>
-//                                     </Select>
-//                                     <FormDescription>You can manage email addresses in your email settings.</FormDescription>
-//                                     <FormMessage />
-//                                 </FormItem>
-//                             )}
-//                         />
-//                     </div>
+                <div className="grid grid-cols-12 gap-4">
 
-//                     <div className="col-span-6">
+                    <div className="col-span-6">
 
-//                         <FormField
-//                             control={form.control}
-//                             name="id"
-//                             render={({ field }) => (
-//                                 <FormItem>
-//                                     <FormLabel>ID</FormLabel>
-//                                     <FormControl>
-//                                         <Input
-//                                             placeholder="shadcn"
+                        <FormField
+                            control={form.control}
+                            name="status"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Status</FormLabel>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select a verified status to display" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="Published">Published</SelectItem>
+                                            <SelectItem value="Draft">Draft</SelectItem>
 
-//                                             type="string"
-//                                             {...field} />
-//                                     </FormControl>
-//                                     <FormDescription>This is your public display name.</FormDescription>
-//                                     <FormMessage />
-//                                 </FormItem>
-//                             )}
-//                         />
-//                     </div>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormDescription>You can chose your status.</FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
 
-//                 </div>
-//                 <Button type="submit">{initialData ? "Update" : "Create"}</Button>
-//             </form>
-//         </Form>
-//     )
-// }
+                    <div className="col-span-6">
+                    </div>
+
+                </div>
+                <Button type="submit" className="px-4">{initialData ? "Update" : "Create"}</Button>
+            </form>
+        </Form>
+    )
+}

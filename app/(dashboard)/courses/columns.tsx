@@ -14,20 +14,17 @@ import {
 import { Checkbox } from "@/components/ui/checkbox"
 import { DataTableColumnHeader } from "./_components/ColumnHeader"
 
+import { MyFormData } from "./types/table";
 
-export type Course = {
-    id: string,
-    price: number,
-    status: "Published" | "Draft",
-    title: string,
+
+
+
+interface ColumnActions {
+    onEdit?: (data: MyFormData) => void;
+    onDelete?: (id: string) => void;
 }
 
-// interface ColumnActions {
-//     onEdit?: (data: Course) => void;
-//     onDelete?: (id: string) => void;
-// }
-
-export const columns: ColumnDef<Course>[] = [
+export const columns: ColumnDef<MyFormData>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -93,9 +90,9 @@ export const columns: ColumnDef<Course>[] = [
     },
     {
         id: "actions",
-        cell: ({ row }) => {
+        cell: ({ row, table }) => {
             const course = row.original
-            // const { onEdit, onDelete } = table.options.meta as ColumnActions;
+            const { onEdit, onDelete } = table.options.meta as ColumnActions;
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -114,13 +111,13 @@ export const columns: ColumnDef<Course>[] = [
                         </DropdownMenuItem>
 
                         <DropdownMenuItem>View course details</DropdownMenuItem>
-                        {/* {onEdit && <DropdownMenuItem onClick={() => onEdit(course)}>
+                        {onEdit && <DropdownMenuItem onClick={() => onEdit(course)}>
                             Edit
                         </DropdownMenuItem>}
 
                         {onDelete && <DropdownMenuItem onClick={() => onDelete(course.id)}>
                             Delete
-                        </DropdownMenuItem>} */}
+                        </DropdownMenuItem>}
                     </DropdownMenuContent>
                 </DropdownMenu>
             )

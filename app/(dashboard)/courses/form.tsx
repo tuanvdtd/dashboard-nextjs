@@ -24,7 +24,7 @@ import {
     SelectValue
 } from "@/components/ui/select"
 
-import { MyFormData } from "./types/table";
+import { CourseTableData } from "./types/table";
 
 const formSchema = z.object({
     id: z.string().optional(),
@@ -34,8 +34,8 @@ const formSchema = z.object({
 });
 
 interface MyFormProps {
-    onSubmit: (data: MyFormData) => void;
-    initialData?: MyFormData | null;
+    onSubmit: (data: CourseTableData) => void;
+    initialData?: CourseTableData | null;
 }
 
 export default function MyForm({ onSubmit, initialData }: MyFormProps) {
@@ -51,7 +51,7 @@ export default function MyForm({ onSubmit, initialData }: MyFormProps) {
 
     function handleSubmit(values: z.infer<typeof formSchema>) {
         try {
-            onSubmit(values as MyFormData)
+            onSubmit(values as CourseTableData)
             form.reset()
             toast.success("User data submitted successfully!")
         } catch (error) {

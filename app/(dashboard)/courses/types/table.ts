@@ -1,4 +1,4 @@
-export interface MyFormData {
+export interface CourseTableData {
     id: string;
     title: string;
     price: number;

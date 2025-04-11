@@ -14,17 +14,17 @@ import {
 import { Checkbox } from "@/components/ui/checkbox"
 import { DataTableColumnHeader } from "./_components/ColumnHeader"
 
-import { MyFormData } from "./types/table";
+import { CourseTableData } from "./types/table";
 
 
 
 
 interface ColumnActions {
-    onEdit?: (data: MyFormData) => void;
+    onEdit?: (data: CourseTableData) => void;
     onDelete?: (id: string) => void;
 }
 
-export const columns: ColumnDef<MyFormData>[] = [
+export const columns: ColumnDef<CourseTableData>[] = [
     {
         id: "select",
         header: ({ table }) => (

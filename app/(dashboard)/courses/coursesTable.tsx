@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import DataTable from "./data-table";
-import { MyFormData } from "./types/table";
+import { CourseTableData } from "./types/table";
 import UserForm from "./form";
 import { columns } from "./columns"
 import {
@@ -13,7 +13,7 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 
-const initialData: MyFormData[] = [
+const initialData: CourseTableData[] = [
     { id: "1", price: 199000, status: "Published", title: "React Basics" },
     { id: "2", price: 299000, status: "Draft", title: "Advanced TypeScript" },
     { id: "3", price: 149000, status: "Published", title: "Intro to Tailwind" },
@@ -30,17 +30,17 @@ const initialData: MyFormData[] = [
 ];
 
 export default function TablePage() {
-    const [data, setData] = useState<MyFormData[]>(initialData);
-    const [editingCourse, setEditingCourse] = useState<MyFormData | null>(null);
+    const [data, setData] = useState<CourseTableData[]>(initialData);
+    const [editingCourse, setEditingCourse] = useState<CourseTableData | null>(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    const handleCreate = (newRecord: Omit<MyFormData, "id">) => {
+    const handleCreate = (newRecord: Omit<CourseTableData, "id">) => {
         const record = { ...newRecord, id: String(data.length + 1) };
         setData([...data, record]);
         setIsDialogOpen(false);
     };
 
-    const handleUpdate = (updatedUser: MyFormData) => {
+    const handleUpdate = (updatedUser: CourseTableData) => {
         setData(data.map((record) => (record.id === updatedUser.id ? updatedUser : record)));
         setIsDialogOpen(false);
         setEditingCourse(null);
@@ -50,12 +50,12 @@ export default function TablePage() {
         setData(data.filter((record) => record.id !== id));
     };
 
-    const handlemultiDelete = (users: MyFormData[]) => {
+    const handlemultiDelete = (users: CourseTableData[]) => {
         const userIds = new Set(users.map((record) => record.id));
         setData(data.filter((record) => !userIds.has(record.id)));
     };
 
-    const handleEdit = (record: MyFormData) => {
+    const handleEdit = (record: CourseTableData) => {
         setEditingCourse(record);
         setIsDialogOpen(true);
     };

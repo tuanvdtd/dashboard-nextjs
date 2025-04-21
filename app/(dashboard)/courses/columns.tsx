@@ -133,7 +133,7 @@ export const columns: ColumnDef<CourseTableData>[] = [
             return (
                 <>
                     {/* Hiển thị nút trên màn hình lớn */}
-                    <div className="hidden lg:flex gap-2">
+                    <div className="hidden lg:flex justify-center gap-2">
                         <Button
                             variant="outline"
                             size="sm"
@@ -197,7 +197,7 @@ export const columns: ColumnDef<CourseTableData>[] = [
 
         },
         header: () => (
-            <div className="hidden lg:flex pl-16">
+            <div className="hidden lg:flex justify-center">
                 <span>Actions</span>
             </div>
         ),

@@ -1,5 +1,4 @@
 "use client"
-import { toast } from "sonner"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -53,10 +52,10 @@ export default function MyForm({ onSubmit, initialData }: MyFormProps) {
         try {
             onSubmit(values as CourseTableData)
             form.reset()
-            toast.success("User data submitted successfully!")
+
         } catch (error) {
             console.error("Form submission error", error)
-            toast.error("Failed to submit the form. Please try again.")
+
         }
     }
 
@@ -98,7 +97,7 @@ export default function MyForm({ onSubmit, initialData }: MyFormProps) {
                                     <FormLabel>Price</FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder="shadcn"
+                                            placeholder="Price"
 
                                             type="number"
                                             {...field} />

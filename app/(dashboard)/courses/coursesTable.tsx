@@ -3,7 +3,7 @@
 import { useState } from "react";
 import DataTable from "./data-table";
 import { CourseTableData } from "./types/table";
-import UserForm from "./form";
+import MyForm from "./form";
 import { columns } from "./columns"
 import {
     Dialog,
@@ -75,7 +75,7 @@ export default function TablePage() {
                         </DialogDescription>
                     </DialogHeader>
                     <div>
-                        <UserForm
+                        <MyForm
                             onSubmit={editingCourse ? handleUpdate : handleCreate}
                             initialData={editingCourse}
                         />
